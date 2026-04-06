@@ -15,7 +15,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  allowedDevOrigins: ["10.0.0.20"],
+  // LAN IPs for opening the dev server from phones/tablets (update if DHCP changes)
+  allowedDevOrigins: ["10.0.0.3", "10.0.0.20"],
 };
 
 export default withNextIntl(nextConfig);

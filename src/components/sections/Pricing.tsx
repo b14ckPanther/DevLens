@@ -63,18 +63,20 @@ export default function Pricing({ initialPlans = [] }: { initialPlans: any[] }) 
             {/* Billing toggle (Always visible now since subscription is default) */}
             <div className="flex items-center gap-3 glass rounded-full p-1.5 border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)]">
               <button
+                type="button"
                 onClick={() => setBilling("monthly")}
-                className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-500 ${billing === "monthly"
-                    ? "bg-gradient-to-r from-[#00C2FF] to-[#1A3CFF] text-white shadow-[0_0_16px_rgba(0,194,255,0.4)] scale-105"
+                className={`rounded-full px-6 py-2.5 text-sm font-bold transition-all duration-500 ${billing === "monthly"
+                    ? "btn-gradient-gold scale-105 shadow-[0_0_18px_rgba(255,195,48,0.45)]"
                     : "text-[rgba(234,234,234,0.5)] hover:text-white"
                   }`}
               >
                 {t("monthly")}
               </button>
               <button
+                type="button"
                 onClick={() => setBilling("yearly")}
-                className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-500 relative ${billing === "yearly"
-                    ? "bg-gradient-to-r from-[#00C2FF] to-[#1A3CFF] text-white shadow-[0_0_16px_rgba(0,194,255,0.4)] scale-105"
+                className={`relative rounded-full px-6 py-2.5 text-sm font-bold transition-all duration-500 ${billing === "yearly"
+                    ? "btn-gradient-gold scale-105 shadow-[0_0_18px_rgba(255,195,48,0.45)]"
                     : "text-[rgba(234,234,234,0.5)] hover:text-white"
                   }`}
               >
@@ -174,10 +176,11 @@ export default function Pricing({ initialPlans = [] }: { initialPlans: any[] }) 
 
                   {/* CTA */}
                   <button
+                    type="button"
                     onClick={() => handlePlanClick(locale === "ar" ? plan.name_ar : (locale === "he" ? plan.name_he : plan.name_en))}
-                    className={`w-full py-4 rounded-2xl text-sm font-black transition-all duration-300 hover:scale-[1.02] ${plan.is_popular
+                    className={`w-full rounded-2xl py-4 text-sm font-black transition-all duration-300 hover:scale-[1.02] ${plan.is_popular
                         ? "bg-gradient-to-r from-[#FF2D95] to-[#FF4FD8] text-white shadow-[0_0_20px_rgba(255,45,149,0.4)] hover:shadow-[0_0_30px_rgba(255,45,149,0.6)]"
-                        : "glass border border-[rgba(255,255,255,0.1)] text-[#EAEAEA] hover:border-[rgba(255,255,255,0.25)] hover:bg-[rgba(255,255,255,0.02)]"
+                        : "btn-gradient-gold shadow-[0_0_20px_rgba(255,195,48,0.3)] hover:shadow-[0_0_28px_rgba(255,195,48,0.45)]"
                       }`}
                   >
                     {t("ctaLabel")}
@@ -194,7 +197,7 @@ export default function Pricing({ initialPlans = [] }: { initialPlans: any[] }) 
                       }}
                       className="group flex flex-col items-center gap-1 w-full"
                     >
-                      <span className="text-[11px] font-bold text-[rgba(234,234,234,0.6)] group-hover:text-[#00C2FF] transition-colors">
+                      <span className="text-[11px] font-bold text-[rgba(234,234,234,0.6)] transition-colors group-hover:text-[#ffc330]">
                         {t("ownWebsite", { price: plan.price_one_time?.toLocaleString() || "0" })}
                       </span>
                     </button>

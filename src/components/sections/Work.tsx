@@ -31,19 +31,31 @@ export interface Project {
 
 type FilterKey = "all" | ProjectCategory;
 
+const EMPTY_PROJECTS: Project[] = [];
+
+/** Keys under the `work` message namespace used for filter button labels */
+type WorkFilterMessageKey =
+  | "filterAll"
+  | "filterSales"
+  | "filterMenus"
+  | "filterLanding"
+  | "filterBooking"
+  | "filterMarket";
+
 export default function Work({
-  initialProjects = [],
-  projectsCount = 0
+  initialProjects,
+  projectsCount = 0,
 }: {
-  initialProjects: any[],
-  projectsCount?: number
+  initialProjects?: Project[];
+  projectsCount?: number;
 }) {
+  const projects = initialProjects ?? EMPTY_PROJECTS;
   const t = useTranslations("work");
   const locale = useLocale();
   const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const filters: { key: FilterKey; labelKey: string }[] = [
+  const filters: { key: FilterKey; labelKey: WorkFilterMessageKey }[] = [
     { key: "all", labelKey: "filterAll" },
     { key: "sales", labelKey: "filterSales" },
     { key: "menus", labelKey: "filterMenus" },
@@ -55,9 +67,9 @@ export default function Work({
   const filtered = useMemo(
     () =>
       activeFilter === "all"
-        ? initialProjects
-        : initialProjects.filter((p) => p.category === activeFilter),
-    [activeFilter]
+        ? projects
+        : projects.filter((p) => p.category === activeFilter),
+    [activeFilter, projects]
   );
 
   return (
@@ -71,7 +83,7 @@ export default function Work({
           label={t("sectionLabel")}
           title={t("title")}
           highlight={t("titleHighlight")}
-          subtitle={t("subtitle", { count: Number(projectsCount || initialProjects.length || 0) })}
+          subtitle={t("subtitle", { count: Number(projectsCount || projects.length || 0) })}
         />
 
         {/* Filters */}
@@ -79,15 +91,16 @@ export default function Work({
           <div className="flex flex-nowrap sm:flex-wrap items-center gap-2 overflow-x-auto sm:overflow-x-visible pb-4 sm:pb-0 mb-10 -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar">
             {filters.map(({ key, labelKey }) => (
               <button
+                type="button"
                 key={key}
                 onClick={() => setActiveFilter(key)}
-                className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all duration-300 border shrink-0 whitespace-nowrap ${
+                className={`shrink-0 whitespace-nowrap rounded-full border px-5 py-2.5 text-sm font-bold transition-all duration-300 ${
                   activeFilter === key
-                    ? "bg-gradient-to-r from-[#00C2FF] to-[#1A3CFF] text-white border-transparent shadow-[0_0_16px_rgba(0,194,255,0.4)]"
-                    : "glass border-[rgba(255,255,255,0.1)] text-[rgba(234,234,234,0.7)] hover:border-[rgba(0,194,255,0.3)] hover:text-white"
+                    ? "btn-gradient-gold border-transparent shadow-[0_0_18px_rgba(255,195,48,0.45)]"
+                    : "glass border-[rgba(255,255,255,0.1)] text-[rgba(234,234,234,0.7)] hover:border-[rgba(255,195,48,0.35)] hover:text-[#EAEAEA]"
                 }`}
               >
-                {t(labelKey as any)}
+                {t(labelKey)}
               </button>
             ))}
           </div>
@@ -102,7 +115,7 @@ export default function Work({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-3"
+              className="grid grid-cols-5 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-6 xl:grid-cols-7 gap-5 sm:gap-3"
             >
               {filtered.map((project, i) => (
                 <motion.div
@@ -117,60 +130,35 @@ export default function Work({
                     ease: [0.16, 1, 0.3, 1] 
                   }}
                   onClick={() => setSelectedProject(project)}
-                  className="group relative rounded-3xl glass border border-[rgba(255,255,255,0.05)] cursor-pointer overflow-hidden aspect-square flex flex-col items-center justify-center p-3 transition-all duration-500"
+                  className="group flex cursor-pointer flex-col items-center gap-2 p-2"
                 >
-                  {/* Brand Ambient Glow */}
-                  <div 
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none blur-3xl z-0"
-                    style={{ background: `radial-gradient(circle at 50% 50%, ${project.color}30 0%, transparent 70%)` }}
-                  />
-
-                  {/* Content Container */}
-                  <div className="relative z-10 flex flex-col items-center gap-3 w-full">
-                    {/* Logo Badge */}
-                    <div className="relative">
-                      {/* Interactive Ring */}
-                      <div 
-                        className="absolute -inset-1 rounded-[1.5rem] opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm scale-95 group-hover:scale-105"
-                        style={{ backgroundColor: project.color }}
-                      />
-                      
-                      <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-[1.25rem] sm:rounded-[1.5rem] relative overflow-hidden flex-shrink-0 bg-white shadow-[0_8px_20px_rgba(0,0,0,0.15)] transition-transform duration-500 group-hover:scale-[1.02]">
-                        {project.logo_url ? (
-                          <Image
-                            src={project.logo_url}
-                            alt={project.name_en}
-                            fill
-                            sizes="(max-width: 639px) 80px, 96px"
-                            className="object-contain p-4 sm:p-5"
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center text-3xl font-black" style={{ color: project.color }}>
-                            {project.initials}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="text-center px-1">
-                      <p className="text-[11px] sm:text-[12px] text-white font-bold tracking-tight mb-0.5 opacity-80 group-hover:opacity-100 transition-all duration-300">
-                        {(locale === "ar" ? project.name_ar : (locale === "he" ? project.name_he : project.name_en)) || project.name_en}
-                      </p>
-                      <p className="text-[9px] uppercase tracking-widest text-[rgba(234,234,234,0.4)] font-black">
-                        {project.category}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Clean Hover Overlay */}
-                  <div className="absolute inset-x-0 bottom-0 top-0 bg-black/60 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center translate-y-full group-hover:translate-y-0 z-20">
-                    <span 
-                      className="text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full text-white"
+                  <div className="relative">
+                    <div
+                      className="absolute -inset-1 rounded-[1.5rem] opacity-0 blur-sm transition-all duration-300 group-hover:opacity-40"
                       style={{ backgroundColor: project.color }}
-                    >
-                      {t("viewProject")}
-                    </span>
+                    />
+                    <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-[1.25rem] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.2)] transition-transform duration-300 group-hover:scale-[1.04] sm:h-24 sm:w-24 sm:rounded-[1.5rem]">
+                      {project.logo_url ? (
+                        <Image
+                          src={project.logo_url}
+                          alt={project.name_en}
+                          fill
+                          sizes="(max-width: 639px) 80px, 96px"
+                          className="object-contain p-4 sm:p-5"
+                          priority={i < 5}
+                          fetchPriority={i < 5 ? "high" : "auto"}
+                        />
+                      ) : (
+                        <div className="flex h-full w-full items-center justify-center text-3xl font-black" style={{ color: project.color }}>
+                          {project.initials}
+                        </div>
+                      )}
+                    </div>
                   </div>
+
+                  <p className="max-w-[8.5rem] text-center text-[11px] font-bold leading-tight tracking-tight text-[#EAEAEA] transition-colors duration-300 group-hover:text-[#ffc330] sm:max-w-[10rem] sm:text-xs">
+                    {(locale === "ar" ? project.name_ar : locale === "he" ? project.name_he : project.name_en) || project.name_en}
+                  </p>
                 </motion.div>
               ))}
             </motion.div>

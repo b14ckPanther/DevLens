@@ -7,6 +7,10 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import { CheckCircle, Mail, Phone, MessageCircle } from "lucide-react";
 import { submitLeadAction } from "@/app/actions/admin";
 
+/** Inline gradient so Tailwind utilities on the same node cannot strip `background-image` */
+const SUBMIT_GOLD_GRADIENT =
+  "linear-gradient(135deg, #ffe08a 0%, #ffc330 40%, #f0a818 75%, #c9830a 100%)";
+
 export default function Contact() {
   const t = useTranslations("contact");
   const [submitting, setSubmitting] = useState(false);
@@ -35,7 +39,7 @@ export default function Contact() {
   };
 
   const inputBase =
-    "w-full px-4 py-3.5 rounded-xl glass border border-[rgba(255,255,255,0.08)] bg-transparent text-[#EAEAEA] placeholder:text-[rgba(234,234,234,0.3)] text-sm outline-none focus:border-[rgba(0,194,255,0.4)] focus:shadow-[0_0_16px_rgba(0,194,255,0.1)] transition-all duration-200";
+    "w-full px-4 py-3.5 rounded-xl glass border border-[rgba(255,255,255,0.08)] bg-transparent text-[#EAEAEA] placeholder:text-[rgba(234,234,234,0.3)] text-sm outline-none focus:border-[rgba(255,195,48,0.45)] focus:shadow-[0_0_16px_rgba(255,195,48,0.12)] transition-all duration-200";
 
   return (
     <section id="contact" className="section-padding px-4 sm:px-6 relative overflow-hidden">
@@ -57,7 +61,7 @@ export default function Contact() {
           {/* Form */}
           <ScrollReveal className="lg:col-span-3">
             <div className="glass-stronger rounded-3xl border border-[rgba(255,255,255,0.1)] p-8 relative overflow-hidden">
-              <div className="absolute top-0 end-0 w-48 h-48 rounded-full bg-[#00C2FF] opacity-[0.04] blur-[60px] pointer-events-none" />
+              <div className="pointer-events-none absolute end-0 top-0 h-48 w-48 rounded-full bg-[#ffc330] opacity-[0.06] blur-[60px]" />
 
               <AnimatePresence mode="wait">
                 {submitted ? (
@@ -68,8 +72,8 @@ export default function Contact() {
                     exit={{ opacity: 0 }}
                     className="flex flex-col items-center justify-center py-12 text-center"
                   >
-                    <div className="w-20 h-20 rounded-full bg-[rgba(0,194,255,0.1)] flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(0,194,255,0.3)]">
-                      <CheckCircle size={40} className="text-[#00C2FF]" />
+                    <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[rgba(255,195,48,0.12)] shadow-[0_0_30px_rgba(255,195,48,0.35)]">
+                      <CheckCircle size={40} className="text-[#ffc330]" />
                     </div>
                     <h3 className="text-2xl font-bold text-[#EAEAEA] mb-2">{t("successTitle")}</h3>
                     <p className="text-[rgba(234,234,234,0.6)]">{t("successMsg")}</p>
@@ -143,12 +147,11 @@ export default function Contact() {
                     <button
                       type="submit"
                       disabled={submitting}
-                      className="w-full py-4 rounded-xl font-bold text-white text-base transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(0,194,255,0.5)]"
+                      className="w-full rounded-xl border-0 py-4 text-base font-bold text-[#0a0a0f] shadow-[0_0_24px_rgba(255,195,48,0.35)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(255,195,48,0.5)] disabled:cursor-not-allowed disabled:opacity-70"
                       style={{
-                        background: "linear-gradient(135deg, #00C2FF, #1A3CFF, #3A2BFF)",
-                        backgroundSize: "200% 200%",
+                        backgroundImage: SUBMIT_GOLD_GRADIENT,
+                        backgroundSize: submitting ? "300% 300%" : "100% 100%",
                         animation: submitting ? "gradient-shift 2s ease infinite" : undefined,
-                        boxShadow: "0 0 24px rgba(0,194,255,0.3)",
                       }}
                     >
                       {submitting ? t("submitting") : t("submit")}
@@ -193,15 +196,15 @@ export default function Contact() {
 
               {/* Promise card */}
               <div
-                className="rounded-2xl p-6 relative overflow-hidden"
+                className="relative overflow-hidden rounded-2xl p-6"
                 style={{
-                  background: "linear-gradient(135deg, rgba(0,194,255,0.08), rgba(58,43,255,0.08))",
-                  border: "1px solid rgba(0,194,255,0.15)",
+                  background: "linear-gradient(135deg, rgba(255,195,48,0.1), rgba(201,131,10,0.06))",
+                  border: "1px solid rgba(255,195,48,0.22)",
                 }}
               >
                 <div className="mb-3">
                   <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-                    <path d="M16 3L6 16H13L11 25L22 12H15L16 3Z" fill="#00C2FF" opacity="0.9"/>
+                    <path d="M16 3L6 16H13L11 25L22 12H15L16 3Z" fill="#ffc330" opacity="0.95"/>
                   </svg>
                 </div>
                 <h4 className="font-bold text-[#EAEAEA] mb-2">{t("promiseTitle")}</h4>

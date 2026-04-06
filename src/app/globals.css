@@ -155,6 +155,12 @@ section {
   z-index: 10;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .hero-aurora {
+    animation: none !important;
+  }
+}
+
 
 .gradient-text-mixed {
   background: linear-gradient(135deg, #00E5FF 0%, #1A3CFF 40%, #FF2D95 100%);

@@ -28,7 +28,7 @@ export default function AdminLogin() {
       } else {
         setError("Invalid password");
       }
-    } catch (err) {
+    } catch {
       setError("An error occurred");
     } finally {
       setLoading(false);
@@ -36,25 +36,31 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-[#0A0A0F]">
-      {/* Background Glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#1A3CFF] opacity-[0.05] blur-[100px]" />
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#0A0A0F]">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ffc330] opacity-[0.06] blur-[100px]" />
       </div>
 
-      <div className="absolute top-8 left-8 z-20">
-        <Link href="/" className="px-4 py-2 glass border border-[rgba(255,255,255,0.1)] rounded-xl text-sm text-[rgba(234,234,234,0.7)] hover:text-white hover:border-white transition-colors flex items-center gap-2">
+      <div className="absolute left-8 top-8 z-20">
+        <Link
+          href="/"
+          className="glass flex items-center gap-2 rounded-xl border border-[rgba(255,255,255,0.1)] px-4 py-2 text-sm text-[rgba(234,234,234,0.7)] transition-colors hover:border-[rgba(255,195,48,0.35)] hover:text-[#EAEAEA]"
+        >
           &larr; Back to Website
         </Link>
       </div>
 
-      <div className="relative z-10 w-full max-w-md p-8 glass border border-[rgba(255,255,255,0.08)] rounded-3xl m-4">
-        <div className="flex flex-col items-center mb-8">
-          <div className="relative w-20 h-20 mb-4 drop-shadow-[0_0_16px_rgba(0,194,255,0.3)]">
-            <Image src="/logo.png" alt="DevLens" fill sizes="64px" className="object-contain" />
+      <div className="relative z-10 m-4 w-full max-w-md rounded-3xl border border-[rgba(255,195,48,0.12)] glass p-8 shadow-[0_0_40px_rgba(255,195,48,0.06)]">
+        <div className="mb-8 flex flex-col items-center">
+          <div className="relative mb-4 h-20 w-20 drop-shadow-[0_0_16px_rgba(255,195,48,0.35)]">
+            <Image src="/logo.png" alt="DevLens" fill sizes="80px" className="object-contain" priority unoptimized />
           </div>
-          <h1 className="text-2xl font-extrabold text-white">DevLens Admin</h1>
-          <p className="text-sm text-[rgba(234,234,234,0.5)]">Enter the master password</p>
+          <h1 className="text-2xl font-extrabold">
+            <span className="text-[#EAEAEA]">Dev</span>
+            <span className="text-[#ffc330]">Lens</span>
+            <span className="text-[#EAEAEA]"> Admin</span>
+          </h1>
+          <p className="mt-1 text-sm text-[rgba(234,234,234,0.5)]">Enter the master password</p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-4">
@@ -64,20 +70,20 @@ export default function AdminLogin() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Admin Password"
-              className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.1)] rounded-xl px-4 py-3 text-white placeholder-[rgba(255,255,255,0.3)] focus:outline-none focus:border-[#00C2FF] transition-colors"
+              className="w-full rounded-xl border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.03)] px-4 py-3 text-white placeholder-[rgba(255,255,255,0.3)] transition-colors focus:border-[rgba(255,195,48,0.5)] focus:outline-none focus:shadow-[0_0_16px_rgba(255,195,48,0.12)]"
               required
             />
           </div>
-          
-          {error && <p className="text-sm text-[#FF2D95] text-center">{error}</p>}
-          
+
+          {error && <p className="text-center text-sm text-[#FF2D95]">{error}</p>}
+
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gradient-to-r from-[#00C2FF] to-[#3A2BFF] text-white font-bold py-3 rounded-xl shadow-[0_0_20px_rgba(0,194,255,0.3)] hover:shadow-[0_0_30px_rgba(0,194,255,0.5)] transition-all flex justify-center"
+            className="btn-gradient-gold flex w-full justify-center rounded-xl py-3 font-bold shadow-[0_0_20px_rgba(255,195,48,0.35)] transition-all hover:shadow-[0_0_28px_rgba(255,195,48,0.5)] disabled:cursor-not-allowed disabled:opacity-70"
           >
             {loading ? (
-              <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              <span className="h-5 w-5 animate-spin rounded-full border-2 border-[#0a0a0f] border-t-transparent" />
             ) : (
               "Login to Dashboard"
             )}

@@ -58,15 +58,15 @@ export default function Hero({ stats }: { stats?: { projectsCount: number, clien
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-1 flex-col items-center justify-center px-0 pb-6 text-center"
         >
-          <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-[rgba(0,194,255,0.25)] px-4 py-2 text-xs font-medium text-[#00C2FF] glass md:mb-8 md:text-sm mt-10 md:mt-0">
-            <span className="h-2 w-2 shrink-0 rounded-full bg-[#00C2FF] opacity-90" />
-            {t("badge")}
+          <span className="glass mb-6 mt-10 inline-flex items-center gap-2 rounded-full border border-[rgba(255,195,48,0.35)] bg-[rgba(255,195,48,0.06)] px-4 py-2 text-xs font-medium md:mt-0 md:mb-8 md:text-sm">
+            <span className="h-2 w-2 shrink-0 rounded-full bg-[#ffc330] opacity-95 shadow-[0_0_10px_rgba(255,195,48,0.55)]" />
+            <span className="gradient-text-highlight">{t("badge")}</span>
           </span>
 
           <h1 className="mb-6 text-3xl font-extrabold leading-[1.15] tracking-tight text-[#EAEAEA] md:text-5xl lg:text-5xl">
             {t("title")}
             <br />
-            <span className="gradient-text-blue">{t("titleHighlight")}</span>
+            <span className="gradient-text-highlight mt-3 inline-block md:mt-5">{t("titleHighlight")}</span>
           </h1>
 
           <p className="mb-10 max-w-2xl text-base leading-relaxed text-[rgba(234,234,234,0.65)] md:text-lg">
@@ -77,8 +77,7 @@ export default function Hero({ stats }: { stats?: { projectsCount: number, clien
             <button
               type="button"
               onClick={() => scrollToSection("#contact")}
-              className="relative inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-[#00C2FF] via-[#1A3CFF] to-[#3A2BFF] px-8 py-4 text-base font-bold text-white shadow-[0_0_30px_rgba(0,194,255,0.4)] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_50px_rgba(0,194,255,0.6)] motion-reduce:animate-none md:animate-gradient"
-              style={{ backgroundSize: "200% 200%" }}
+              className="btn-gradient-gold btn-gradient-gold-animated relative inline-flex items-center gap-2 rounded-2xl px-8 py-4 text-base font-bold shadow-[0_0_28px_rgba(255,195,48,0.45)] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_44px_rgba(255,195,48,0.55)]"
             >
               {t("cta1")}
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="flex-shrink-0 rtl:rotate-180"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -99,7 +98,7 @@ export default function Hero({ stats }: { stats?: { projectsCount: number, clien
               { value: yrsCount, label: t("stat3") },
             ].map((stat, i) => (
               <div key={i} className="flex flex-col items-center gap-1">
-                <span className="text-3xl font-extrabold gradient-text-blue">{stat.value}</span>
+                <span className="text-3xl font-extrabold gradient-text-highlight">{stat.value}</span>
                 <span className="text-sm text-[rgba(234,234,234,0.5)]">{stat.label}</span>
               </div>
             ))}

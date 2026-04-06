@@ -50,7 +50,7 @@ export default function Navbar() {
             className="flex items-center gap-2.5 group"
             onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
           >
-            <div className="relative w-9 h-9 flex-shrink-0 drop-shadow-[0_0_8px_rgba(0,194,255,0.4)] group-hover:drop-shadow-[0_0_14px_rgba(0,194,255,0.65)] transition-all duration-300">
+            <div className="relative h-9 w-9 flex-shrink-0 drop-shadow-[0_0_8px_rgba(255,195,48,0.35)] transition-all duration-300 group-hover:drop-shadow-[0_0_14px_rgba(255,195,48,0.55)]">
               <Image
                 src="/logo.png"
                 alt="DevLens logo"
@@ -61,8 +61,9 @@ export default function Navbar() {
                 unoptimized
               />
             </div>
-            <span className="text-xl font-bold text-white group-hover:text-[#00C2FF] transition-colors duration-200">
-              DevLens
+            <span className="text-xl font-bold">
+              <span className="text-[#EAEAEA] transition-colors duration-200 group-hover:text-[#ffc330]">Dev</span>
+              <span className="text-[#ffc330] transition-colors duration-200 group-hover:text-[#ffd666]">Lens</span>
             </span>
           </a>
 
@@ -84,7 +85,7 @@ export default function Navbar() {
             <LanguageSwitcher />
             <button
               onClick={() => handleNavClick("#contact")}
-              className="hidden sm:flex items-center px-4 py-2 text-sm font-semibold rounded-xl bg-gradient-to-r from-[#00C2FF] to-[#1A3CFF] text-white shadow-[0_0_16px_rgba(0,194,255,0.3)] hover:shadow-[0_0_24px_rgba(0,194,255,0.5)] hover:scale-[1.03] transition-all duration-200"
+              className="btn-gradient-gold hidden items-center rounded-xl px-4 py-2 text-sm font-semibold shadow-[0_0_18px_rgba(255,195,48,0.35)] transition-all duration-200 hover:scale-[1.03] hover:shadow-[0_0_26px_rgba(255,195,48,0.5)] sm:flex"
             >
               {t("getStarted")}
             </button>
@@ -133,7 +134,7 @@ export default function Navbar() {
               <div className="mt-4 pt-4 border-t border-[rgba(255,255,255,0.08)]">
                 <button
                   onClick={() => handleNavClick("#contact")}
-                  className="w-full py-3 text-sm font-semibold rounded-xl bg-gradient-to-r from-[#00C2FF] to-[#1A3CFF] text-white hover:opacity-90 transition-opacity"
+                  className="btn-gradient-gold w-full rounded-xl py-3 text-sm font-semibold shadow-[0_0_16px_rgba(255,195,48,0.3)] transition-opacity hover:opacity-95"
                 >
                   {t("getStarted")}
                 </button>

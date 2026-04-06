@@ -39,6 +39,10 @@ yarn-error.log*
 # Supabase SQL (keep schema/migrations locally; do not commit)
 /supabase/**/*.sql
 
+# Local Cursor / agent instructions (not versioned)
+/AGENTS.md
+/CLAUDE.md
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

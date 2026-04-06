@@ -137,6 +137,26 @@ section {
   background-clip: text;
 }
 
+/* Title highlight accent (hero + SectionTitle) — gold #FFC330. !important resists Tailwind + RTL inherit. */
+.gradient-text-highlight {
+  display: inline-block;
+  color: transparent !important;
+  background-color: transparent !important;
+  background-image: linear-gradient(135deg, #ffd666 0%, #ffc330 40%, #f5b014 70%, #c9830a 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Solid fallback when background-clip:text is unsupported (some mobile WebViews) */
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .gradient-text-highlight {
+    background-image: none !important;
+    color: #ffc330 !important;
+    -webkit-text-fill-color: #ffc330 !important;
+  }
+}
+
 .gradient-text-warm {
   background: linear-gradient(135deg, #FF6A00, #FF2D95, #FF4FD8);
   -webkit-background-clip: text;
@@ -218,6 +238,33 @@ section {
 .animate-gradient {
   background-size: 300% 300%;
   animation: gradient-shift 8s ease infinite;
+}
+
+/* Primary buttons — gold (#FFC330). `!important` avoids Tailwind utilities resetting background on the same element. */
+.btn-gradient-gold {
+  border-style: solid;
+  border-color: transparent;
+  color: #0a0a0f !important;
+  background-color: transparent !important;
+  background-image: linear-gradient(135deg, #ffe08a 0%, #ffc330 35%, #f0a818 70%, #c9830a 100%) !important;
+  background-size: 300% 300%;
+}
+
+.btn-gradient-gold:hover {
+  color: #0a0a0f !important;
+}
+
+/* Subtle gradient drift on md+ only (Tailwind md breakpoint) */
+@media (min-width: 768px) {
+  .btn-gradient-gold-animated {
+    animation: gradient-shift 8s ease infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-gradient-gold-animated {
+    animation: none !important;
+  }
 }
 
 .section-padding {

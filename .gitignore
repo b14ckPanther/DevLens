@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# Supabase SQL (keep schema/migrations locally; do not commit)
+/supabase/**/*.sql
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

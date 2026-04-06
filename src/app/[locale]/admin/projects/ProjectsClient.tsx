@@ -147,7 +147,13 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: a
                   <div className="flex items-center gap-3">
                     {project.logo_url ? (
                       <div className="w-8 h-8 rounded-lg overflow-hidden border border-[rgba(255,255,255,0.1)] relative flex-shrink-0 bg-[rgba(255,255,255,0.02)]">
-                        <Image src={project.logo_url} alt="Logo" fill className="object-contain p-1" />
+                        <Image
+                          src={project.logo_url}
+                          alt="Logo"
+                          fill
+                          sizes="32px"
+                          className="object-contain p-1"
+                        />
                       </div>
                     ) : (
                       <div className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs flex-shrink-0" style={{ background: `${project.color}20`, color: project.color, border: `1px solid ${project.color}40` }}>

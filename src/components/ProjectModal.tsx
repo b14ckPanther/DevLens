@@ -74,7 +74,13 @@ export default function ProjectModal({ project, onClose, visitLabel, closeLabel 
 
                   {project.logo_url ? (
                     <div className="w-40 h-40 rounded-[2rem] relative flex items-center justify-center mx-auto overflow-hidden bg-white shadow-[0_15px_40px_rgba(0,0,0,0.2)] border border-[rgba(255,255,255,0.1)]">
-                      <Image src={project.logo_url} alt="Logo" fill className="object-contain p-8" />
+                      <Image
+                        src={project.logo_url}
+                        alt="Logo"
+                        fill
+                        sizes="160px"
+                        className="object-contain p-8"
+                      />
                     </div>
                   ) : (
                     <div

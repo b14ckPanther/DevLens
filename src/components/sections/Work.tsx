@@ -137,7 +137,13 @@ export default function Work({
                       
                       <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-[1.25rem] sm:rounded-[1.5rem] relative overflow-hidden flex-shrink-0 bg-white shadow-[0_8px_20px_rgba(0,0,0,0.15)] transition-transform duration-500 group-hover:scale-[1.02]">
                         {project.logo_url ? (
-                          <Image src={project.logo_url} alt={project.name_en} fill className="object-contain p-4 sm:p-5" />
+                          <Image
+                            src={project.logo_url}
+                            alt={project.name_en}
+                            fill
+                            sizes="(max-width: 639px) 80px, 96px"
+                            className="object-contain p-4 sm:p-5"
+                          />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-3xl font-black" style={{ color: project.color }}>
                             {project.initials}
